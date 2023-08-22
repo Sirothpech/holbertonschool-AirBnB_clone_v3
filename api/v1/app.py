@@ -1,4 +1,4 @@
-#!usr/bin/python3
+#!/usr/bin/python3
 """ Module for the app view """
 from flask import Flask
 import os
