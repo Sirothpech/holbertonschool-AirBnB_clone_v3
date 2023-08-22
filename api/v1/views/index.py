@@ -10,6 +10,7 @@ from models.state import State
 from models.user import User
 import models
 
+
 @app_views.route('/status', strict_slashes=False)
 def status():
     """HBNB status"""
