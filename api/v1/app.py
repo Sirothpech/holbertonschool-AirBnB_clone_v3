@@ -1,30 +1,29 @@
 #!/usr/bin/python3
-""" Module for the app view """
-from flask import Flask, jsonify
-import os
+""" app of the version 1 of the API"""
+
+from flask import Flask
 from models import storage
 from api.v1.views import app_views
+from flask import jsonify
+
 
 app = Flask(__name__)
-
 
 app.register_blueprint(app_views)
 
 
-# app name
 @app.errorhandler(404)
-def not_found(e):
-    """ 404 error handler """
-    return jsonify({'error': 'Not found'}), 404
+def not_found(error):
+    """handler for 404 errors that returns a JSON-formatted 404 status code"""
+    response = jsonify({"error": "Not found"}), 404
+    return response
 
 
 @app.teardown_appcontext
-def teardown_appcontext(error):
+def teardown_db(exception):
+    """closes the storage on teardown"""
     storage.close()
 
 
 if __name__ == "__main__":
-    host = os.environ.get('HBNB_API_HOST', '0.0.0.0')
-    port = int(os.environ.get('HBNB_API_PORT', 5000))
-
-    app.run(host=host, port=port, threaded=True)
+    app.run(host='0.0.0.0', port='5000', threaded=True)
