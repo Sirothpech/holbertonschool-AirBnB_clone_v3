@@ -52,14 +52,13 @@ def create_city(state_id):
         return jsonify({'error': 'Not a JSON'}), 400
     if 'name' not in request.get_json():
         return jsonify({'error': 'Missing name'}), 400
-    request.get_json()['state_id'] == state.id
-    new_state = State(**request.get_json())
-    new_state.save()
-    return jsonify(new_state.to_dict()), 201
+    new_city = City(**request.get_json())
+    new_city.save()
+    return jsonify(new_city.to_dict()), 201
 
 
 @app_views.route('/cities/<city_id>', methods=['PUT'], strict_slashes=False)
-def update_state(city_id):
+def update_city(city_id):
     """ Method that updates a state based on its ID. """
     city = storage.get(City, city_id)
     if city is None:
