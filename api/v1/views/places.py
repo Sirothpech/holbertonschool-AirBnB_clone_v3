@@ -10,7 +10,7 @@ from flask import jsonify, request
 from api.v1.views import app_views
 
 
-@app_views.route('/cities/<city_id>/cities', methods=['GET'],
+@app_views.route('/cities/<city_id>/places', methods=['GET'],
                  strict_slashes=False)
 def get_places(city_id):
     """Retrieves get method for all place"""
