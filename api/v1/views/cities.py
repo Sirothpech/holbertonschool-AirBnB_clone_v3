@@ -52,7 +52,8 @@ def create_city(state_id):
         return jsonify({'error': 'Not a JSON'}), 400
     if 'name' not in request.get_json():
         return jsonify({'error': 'Missing name'}), 400
-    new_city = City(state_id=state_id, **request.get_json())
+    new_city = City(**request.get_json())
+    new_city.state_id = state.id
     new_city.save()
     return jsonify(new_city.to_dict()), 201
 
