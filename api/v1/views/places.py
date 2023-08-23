@@ -16,7 +16,7 @@ def get_places(city_id):
     """Retrieves get method for all place"""
     city = storage.get(City, city_id)
     if city is None:
-        return jsonify({'error': 'Not found'}), 404
+        return jsonify({'error': 'Place not found'}), 404
     return jsonify([place.to_dict()for place in city.places])
 
 
@@ -75,7 +75,7 @@ def update_place(place_id):
     if not request.get_json():
         return jsonify({'error': 'Not a JSON'}), 400
     for key, value in request.get_json().items():
-        if key not in ['id', 'created_at', 'updated_at']:
+        if key not in ['id', 'user_id', 'city_id', 'created_at', 'updated_at']:
             setattr(place, key, value)
     place.save()
     return jsonify(place.to_dict()), 200
