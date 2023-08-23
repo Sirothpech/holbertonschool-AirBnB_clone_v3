@@ -9,7 +9,8 @@ from api.v1.views import app_views
 
 
 @app_views.route('/amenities/', methods=['GET'], strict_slashes=False)
-@app_views.route('/amenities/<amenity_id>', methods=['GET'], strict_slashes=False)
+@app_views.route('/amenities/<amenity_id>', methods=['GET'],
+                 strict_slashes=False)
 def get_amenities(amenity_id=None):
     """Retrieves get method for all amenity"""
     all_amenity = storage.all(Amenity).values()
