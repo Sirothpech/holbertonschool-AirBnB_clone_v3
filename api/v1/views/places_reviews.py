@@ -57,8 +57,8 @@ def create_review(place_id):
     user = storage.get(User, user_id)
     if user is None:
         return jsonify({'error': 'Not found'}), 404
-    if 'name' not in request.get_json():
-        return jsonify({'error': 'Missing name'}), 400
+    if 'text' not in request.get_json():
+        return jsonify({'error': 'Missing text'}), 400
     new_review = Review(**request.get_json())
     new_review.place_id = place.id
     new_review.user_id = user.id
